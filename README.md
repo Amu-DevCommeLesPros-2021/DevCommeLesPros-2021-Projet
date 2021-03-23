@@ -1,24 +1,28 @@
-![](https://github.com/thierryseegers/DevCommeLesPros-2020-Projet/workflows/Test%20master/badge.svg)
+![](https://github.com/thierryseegers/DevCommeLesPros-2020-Projet/workflows/Run%20tests/badge.svg)
 
-# DevCommeLesPros-2020-Projet
+<!-- TOC ignore:true -->
+# DevCommeLesPros-2021-Projet
 
 Modèle de départ pour le projet de programmation à effectuer en groupe de deux ou trois étudiants.
 Vous n'êtes pas dans l'obligation de garder exactment les mêmes équipes que pour les exercices précédents.
 
+<!-- TOC ignore:true -->
 # Table des matières
+
+<!-- TOC -->
 
 - [Objectif](#objectif)
 - [Spécifications fonctionelles](#sp%C3%A9cifications-fonctionelles)
-    - [Fonctionalités pour une entreprise](#fonctionalit%C3%A9s-pour-une-entreprise)
-    - [Fonctionalités pour un chercheur d'emploi](#fonctionalit%C3%A9s-pour-un-chercheur-demploi)
-    - [Fonctionalité pour un employé](#fonctionalit%C3%A9-pour-un-employ%C3%A9)
+    - [Fonctionalités pour un restaurateur](#fonctionalit%C3%A9s-pour-un-restaurateur)
+    - [Fonctionalités pour un livreur](#fonctionalit%C3%A9s-pour-un-livreur)
+    - [Fonctionalités pour un client](#fonctionalit%C3%A9s-pour-un-client)
 - [Spécifications de conception](#sp%C3%A9cifications-de-conception)
     - [Interface](#interface)
     - [Base de données](#base-de-donn%C3%A9es)
-        - [Table d'entreprise](#table-dentreprise)
-        - [Table de postes](#table-de-postes)
-        - [Table de chercheur d'emploi](#table-de-chercheur-demploi)
-        - [Table des employés](#table-des-employ%C3%A9s)
+        - [Table des restaurants](#table-des-restaurants)
+        - [Table d'items de menus](#table-ditems-de-menus)
+        - [Table des livreurs](#table-des-livreurs)
+        - [Table des clients](#table-des-clients)
     - [Langage de programmation et paramètres de compilateur](#langage-de-programmation-et-param%C3%A8tres-de-compilateur)
     - [Journal](#journal)
 - [Instructions de travail](#instructions-de-travail)
@@ -27,9 +31,9 @@ Vous n'êtes pas dans l'obligation de garder exactment les mêmes équipes que p
         - [Tests unitaires et tests d'intégration](#tests-unitaires-et-tests-dint%C3%A9gration)
         - [Intégration continue](#int%C3%A9gration-continue)
     - [Documentation](#documentation)
-        - [Documentation pour les ingénieurs](#documentation-pour-les-ing%C3%A9nieurs)
         - [Documentation pour les utilisateurs](#documentation-pour-les-utilisateurs)
-    - [Stades de développement](#stades-de-d%C3%A9veloppement)
+        - [Documentation pour les ingénieurs](#documentation-pour-les-ing%C3%A9nieurs)
+    - [Phases de développement](#phases-de-d%C3%A9veloppement)
         - [Pré-alpha](#pr%C3%A9-alpha)
         - [Alpha](#alpha)
         - [Beta](#beta)
@@ -41,114 +45,99 @@ Vous n'êtes pas dans l'obligation de garder exactment les mêmes équipes que p
     - [La méthode de développement](#la-m%C3%A9thode-de-d%C3%A9veloppement)
 - [Les extras](#les-extras)
 
+<!-- /TOC -->
 # Objectif
 
-Le site [LinkedIn](https://linkedin.com) est un réseau social servant de rapprochement et de moyen de contact entre des entreprises, des demandeurs d'emploi et d'anciens collègues travail.
+Le service [UberEats](https://www.ubereats.com) est un service de livraison de repas à domicile.
+Cette platforme met en lien des restaurateurs, des livreurs et des clients.
 Vous avez à créer un programme qui simule cette plateforme.
 
 Cette application n'est pas un site web.
-C'est un programme lancé à l'invite de commandes qui utilisent des fichers locaux comme base de données.
+C'est un programme lancé à l'invite de commandes qui utilisent des fichiers locaux comme base de données.
+Son utilisation ne se fera que par l'invite de commandes.
 
 # Spécifications fonctionelles
 
-Sur cette platforme, on distingue trois profils d'utilisateur avec des besoins propres.
-Les entreprises, les chercheurs d'emploi et les employés.
+Sur cette platforme, on distingue trois profils d'utilisateur avec des besoins et des fonctionalités qui leurs sont propres : les restaurateurs, les livreurs et les clients.
 
-## Fonctionalités pour une entreprise
+## Fonctionalités pour un restaurateur
 
-Une entreprise annonce des postes à pourvoir, spécifiant les compétences requises.
-Elle peut aussi rechercher parmi les chercheurs d'emploi ceux qui correspondent à ses besoins.
+À un restaurant correspond un type de cuisine : fast-food, sushi, sandwicherie, etc.
+Chaque restaurant a son menu composé de plusieurs items.
+Certains items peuvent se retrouver sur des menus de différents restaurants.
 
-- [ ] Créer un profil
-    - [ ] Nom
+- [ ] Créer un compte
+    - [ ] Nom (du restaurant)
     - [ ] Code postal
-    - [ ] Adresse mail
-- [ ] Supprimer un profil
-    - [ ] Supprime automatiquement les postes à pourvoir existant
-- [ ] Créer le profil d'un poste à pourvoir
-    - [ ] Titre
-    - [ ] Compétences requises
-- [ ] Supprimer le profil d'un poste pourvu
-- [ ] Rechercher parmi les chercheurs d'emploi pour des profils qui correspondent à un poste à pourvoir
-    - [ ] Recherche par compétences
-    - [ ] Recherche par compétences et code postal
-    - [ ] Résultats
+    - [ ] Téléphone
+    - [ ] Type de cuisine
+- [ ] Supprimer un compte
+    - [ ] Supprime les références à ce restaurant dans les items
+- [ ] Modifier le menu
+    - [ ] Ajouter un nouvel item au menu
         - [ ] Nom
-        - [ ] Prénom
-        - [ ] Adresse mail
+        - [ ] Ingrédients principaux
+        - [ ] Prix
+    - [ ] Ajouter un item au menu parmi la liste des items existants
+    - [ ] Supprimer un item
 
-## Fonctionalités pour un chercheur d'emploi
+## Fonctionalités pour un livreur
 
-Pour un chercheur d'emploi, un bon moyen d'entrer en contact avec une entreprise qui nous intéresse est grâce à une personne que l'on connaît déjà (un(e) ancien(ne) collègue de travail) qui travaille présentement pour cette entreprise.
+Un livreur n'a pas un rayon d'action infini.
+Chaque livreur a une liste de code postaux dans lesquels il peut se déplacer.
+Un livreur peut travailler à son propre compte ou travailler exclusivement pour un restaurant en particulier.
+Si un livreur travaille pour un restaurateur exclusivement, il est attendu qu'il peut se déplacer dans le code postal du restaurant en question.
 
-Lorsqu'un checheur d'emploi est embauché, son profil transitionne vers «employé».
-
-- [ ] Créer un profil
+- [ ] Créer un compte
     - [ ] Nom
-    - [ ] Prénom
-    - [ ] Adresse mail
-    - [ ] Code postal
-    - [ ] Compétences
-    - [ ] Ancien(ne)s collègues de travail parmi les personne employés
-- [ ] Modifier un profil
-    - [ ] Ajouter des compétences
-    - [ ] Ajouter un(e) ancien(ne) collègue de travail
-    - [ ] Modifier le code postal
-- [ ] Transitionner le profil de «chercheur d'emploi» à un profil «employé»
-- [ ] Supprimer un profil
-- [ ] Rechercher parmi les les postes à pourvoir qui correspondent à son profil
-    - [ ] Recherche par compétences
-    - [ ] Recherche par compétences et code postal
-    - [ ] Résultats
-        - [ ] Titre du poste
-        - [ ] Nom de l'entreprise
-        - [ ] Adresse mail de l'entreprise
-        - [ ] Code postal de l'entreprise
-- [ ] Rechercher parmi les anciens collègues
-    - [ ] Recherche par entreprise (retoune les ancien(ne)s collègues employés à l'entreprise)
-    - [ ] Recherche par compétences (pour les compétences du chercheur d'emploi, retourne les ancien(ne)s collègues employés aux entreprises qui recherchent ces compétences)
-    - [ ] Résultats
-        - [ ] Nom du (de la) collègue
-        - [ ] Prénom du (de la) collègue
-        - [ ] Adresse mail du (de la) collègue
+    - [ ] Code postaux de déplacement
+    - [ ] Téléphone
+    - [ ] Exclusivité restaurateur
+- [ ] Supprimer un compte
+- [ ] Modifier son profil
+    - [ ] Code postaux de déplacement
+    - [ ] Téléphone
+    - [ ] Exclusivité restaurateur
 
-## Fonctionalités pour un employé
+## Fonctionalités pour un client
 
-C'est bien d'être à l'emploi mais pour diverses raisons il peut arriver qu'on veuille quand même s'informer sur les postes à pourvoir pour trouver un travail plus rémunérateur, plus près de chez soi, etc.
+Un client informe son profil à la création de son compte.
+Son solde de départ sera de zéro.
+Il peut par la suite ajouter de l'argent à son solde.
+Ce solde sera débité au moment de passer une commande.
 
-Lorsqu'un un employé quitte ou perd son emploi et est en recherche d'emploi, son profil transitionne vers «checheur d'emploi».
+En tant que client, je ne peux me faire livrer d'un resturant seulement s'il existe un livreur qui peut se déplacer dans le code postal du restaurant en question et mon propre code postal.
+Par exemple, si j'habite dans le 13009, je peux me faire livrer d'un restaurant dans le 13001 uniquement s'il existe un livreur qui peut se déplacer à la fois dans le 13009 et le 13001.
 
-- [ ] Créer un profil
+- [ ] Créer un compte
     - [ ] Nom
-    - [ ] Prénom
-    - [ ] Adresse mail
     - [ ] Code postal
-    - [ ] Compétences
-    - [ ] Ancien(ne)s collègues de travail parmi les personne employés
-    - [ ] Entreprise
-- [ ] Modifier un profil
-    - [ ] Ajouter des compétences
-    - [ ] Ajouter un(e) ancien(ne) collègue de travail
-    - [ ] Modifier le code postal
-    - [ ] Modifier l'entreprise
-- [ ] Transitionner le profil «employé» vers «chercheur d'emploi»
-    - [ ] Les employé(e)s de l'entreprise quittée s'ajoutent automatiquement à liste des ancien(ne)s collègues de travail
-- [ ] Supprimer le profil
-- [ ] Rechercher parmi les les postes à pourvoir qui correspondent au profil de l'employé
-    - [ ] Recherche par compétences
-    - [ ] Recherche par compétences et code postal
-    - [ ] Résultats
-        - [ ] Titre du poste
-        - [ ] Nom de l'entreprise
-        - [ ] Adresse mail de l'entreprise
-        - [ ] Code postal de l'entreprise
-- [ ] Rechercher parmi les anciens collègues
-    - [ ] Recherche par entreprise (retoune les ancien(ne)s collègues employés à l'entreprise)
-    - [ ] Recherche par compétences (pour les compétences du chercheur d'emploi, retourne les ancien(ne)s collègues employés aux entreprises qui recherchent ces compétences)
-    - [ ] Résultats
-        - [ ] Nom du (de la) collègue
-        - [ ] Prénom du (de la) collègue
-        - [ ] Adresse mail du (de la) collègue
+    - [ ] Téléphone
+- [ ] Supprimer un compte
+- [ ] Modifier son profil
+    - [ ] Code postal
+    - [ ] Téléphone
+- [ ] Solde
+    - [ ] Confirmer le solde courant
+    - [ ] Créditer un montant
+- [ ] Voir la liste des restaurants
+    - [ ] Restreindre la liste...
+        - [ ] À qui peut me livrer
+        - [ ] À un type de cuisine
+        - [ ] À une combinaison de ces paramètres
+- [ ] Commande 
+    - [ ] Voir la liste des items
+        - [ ] Restreindre la liste...
+            - [ ] À qui peut me livrer
+            - [ ] À un type de cuisine
+            - [ ] À un seul restaurant
+            - [ ] Aux items moins cher que mon solde disponible
+            - [ ] À une combinaison de ces paramètres
+    - [ ] Ajouter un item
+    - [ ] Enlever un item
+    - [ ] Passer la commande
+        - [ ] Débite le solde
+
 
 # Spécifications de conception
 
@@ -158,28 +147,27 @@ Ce programme sera lancé à l'invite de commandes.
 L'utilisateur naviguera les divers fonctionalités grâce à une arborescence de menu affichée à l'écran. Quelques exemples :
 
 ```
-*** Bienvenu sur LuminIn, le site des pros ***
+*** Bienvenu sur LuminEats, la livraison à vitesse luminique ***
 
-* Menu principal *
+* Menu Principal *
 
 Vous êtes :
-1. Une entreprise
-2. Un employé
-3. À la recherche d'un emploi
+1. Un·e restaurateur·trice
+2. Un·e livreur·se
+3. Un·e client·e
 
 Votre choix ('q' pour quitter) : 1
 ```
 
 ```
-*** Bienvenu sur LuminIn, le site des pros ***
+*** Bienvenu sur LuminEats, la livraison à vitesse luminique ***
 
-* Menu entreprise *
+* Menu Restaurateur *
 
 Vous voulez :
-1. Créer le profil de votre entreprise
-2. Créer le profil d'un poste à pourvoir
-3. Supprimer le profil d'un poste maintenant pourvu
-4. Faire une recherche parmi les chercheurs d'emploi
+1. Créer un compte pour votre restaurant
+2. Supprimer votre compte
+3. Modifier votre menu (ajouter/modifier/supprimer)
 
 Votre choix ('q' pour quitter, 'p' pour menu précédent) : 
 ```
@@ -188,84 +176,92 @@ Votre choix ('q' pour quitter, 'p' pour menu précédent) :
 
 La base de données sera constituée de plusieurs fichiers `.csv`.
 Un fichier par table.
-Les tables de la base de données suivent le même format que la table utilisée dans l'exercice 4 (`groupe.csv`) où les champs sont séparés par des virgules.
-Si un champ contient plusieurs valeurs, celles-ci sont séparées par des points-virgules. 
+Les tables de la base de données suivent le même format que la table utilisée dans l'exercice 4 (`docteurs.txt`) où les champs sont séparés par des virgules.
+Si un champ contient plusieurs valeurs, celles-ci sont séparées par des points-virgules.
+Ce format standard s'appelle d'ailleurs [«Comma-separated values»](https://fr.wikipedia.org/wiki/Comma-separated_values) (valeurs séparées par des virgules).
+En général, l'extension de ces fichiers sont `.csv` plutôt que `.txt`.
 
 L'application doit pouvoir utiliser une base de données existante.
 Les informations dans la base de données persiste entre les utilisations de l'application.
 C'est-à-dire qu'elle n'est pas remise à zéro à chaque fois que lancez l'application.
+Si je crée un ouveau compte client et que je quitte l'application, je doit pouvoir relancer l'application et y retrouver mon compte client déjà créé.
 
 Chaque tuple dans une table est assigné une clé primaire avec un numéro unique dans cette table.
-Aussi, certains attributs peuvent être des clés étrangères.
+Certains attributs peuvent être des clés étrangères.
 
 Quelques exemples :
 
-### Table d'entreprise
+### Table des restaurants
+
+L'attribut `menu` est une liste de clés primaires `id` de la table des items.
 
 ```
-id,nom,code postal,mail
-1,Disney,77700,walt@disney.com
-2,Google,75009,emplois@google.com
+id,nom,code postal,telephone,type,menu
+1,Chez Michel,13001,04 13 13 13 13,Provencal,1;4;5
+2,Le Veg,13005,04 10 11 12 13,Vegetarien,2;3;4
+3,Joe's International House of Pancakes,13010,04 22 33 44 55,6;7
 ```
 
-### Table de postes
-
-L'attribut `entreprise` est une clé `id` de la table des entreprises.
+### Table d'items de menus
 
 ```
-id,titre,competences,entreprise
-1,acteur,comedie;gag;1
-2,developpeur,C;SQL;Python,2
+id,nom,ingredients,prix
+1,bouillabaise,poissons de roche;pommes de terre,25
+2,taco,haricots;salsa;lime;tortilla,4
+3,houmous,pois chiche;tahini;ail;citron,6
+4,ratatouille,aubergine;courgette;poivron;tomate,15
+5,salade nicoise,oeuf;thon;olive;huile,10
+6,pancakes aux myrtilles,farine;lait;oeuf;myrtille,8
+7,petit-dej du champion,oeufs;toast;bacon;pomme de terre,12
 ```
 
-### Table de chercheur d'emploi
+### Table des livreurs
 
-L'attribut `collegues` est une liste de clé `id` de la table des employés.
-
-```
-id,nom,prenom,mail,code postal,competences,collegues
-1,Duck,Donald,donal.duck@canardville.gov,77700,comedie;gag,2
-2,Pignon,Francois,pignouf@gmail.com,75020,C;SQL;Python,
-```
-
-### Table des employés
-
-L'attribut `collegues` est une liste de clé `id` de la table des employés.
-L'attribut `entreprise` est une clé `id` de la table des entreprises.
+Si le livreur travaille exclusivement pour un restaurant en particuler, l'attribut `restaurant` est une clé primaire `id` de la table des resturants.
+Si le livreur travaille à son propre compte, l'attribut `restaurant` sera `0`.
 
 ```
-id,nom,prenom,mail,code postal,competences,collegues,entreprise
-1,Untel,Michel,m_untel@google.com,13010,C++;Python;,,2
-2,Mouse,Mickey,mickey@mickeyville.gov,77700,comedie,3,1
-3,Mouse,Minnie,minnie@mickeyville.gov,77700,comedie;chant,2,1
+id,nom,deplacement,telephone,restaurant
+1,Francois Pignon,13001;13002;13003,1
+2,Donald Duck,13001;13004;13005;13006;13009;13010,0
+3,Mickey Mouse,13008,13009;13010;13011,0
 ```
 
-> Est-ce qu'on doit «commit»er les fichiers de la base donnée ?
+### Table des clients
 
-Il vous sera probablement bénéfique, en effet, d'avoir une certaine base de données de départ partagée entre vous. Ne perdez pas trop temps à la remplir. C'est amusant à faire mais les noms d'employé rigolos ne valent pas plus de points.
+```
+id,nom,code postal,telephone
+1,Francoise Perrin,13005,04 10 20 30 40
+2,Daffy Duck,13010,04 90 91 92 93
+3,Quentin Tarantino,13008,04 99 88 77 66
+```
 
-Par la suite, quand vous testez votre application, si la base de données est modifiée par les tests, elle ne devrait pas être «commit»ée. Car il faut toujours tester à partir du même point.
+> Est-ce qu'on doit «commit»er les fichiers de la base de données ?
+
+Il vous sera probablement bénéfique, en effet, d'avoir une certaine base de données de départ partagée entre vous.
+Ne perdez pas trop temps à la remplir.
+C'est amusant à faire mais les noms de restaurant rigolos ne valent pas plus de points.
+
+Par la suite, quand vous testez votre application, si la base de données est modifiée par les tests, elle ne devrait pas être «commit»ée.
+Il est préférable de toujours tester à partir du même point.
 
 ## Langage de programmation et paramètres de compilateur
 
 Le projet peut être écrit en C ou en C++.
 
-Utilisez les paramètres `-Wall -pedantic -Werror` au moment de compiler.
-
-> `-Werror` ? C'est nouveau.
-
-Oui, ce paramètre transforme les avertissments du compilateur en erreur. 
-C'est une façon de se forcer à écouter ce que nous dit le compilateur à propos de code potentiellement incorrect ou dangereux.
+Utilisez les options `-Wall -Wextra -Werror` du compilateur.
+Ces options nous évitent bien des maux de tête car elles soulignent des erreurs qui peuvent facilement devenir fatales.
 
 ## Journal
 
-Le programme devra produire un [journal](https://www.dropbox.com/scl/fi/12l29vxc1v4z74wum6ay3/D-velopper-comme-les-pros.paper?dl=0&rlkey=gbd3b2ajnlo93wz6xvsph5bcu#:uid=877002050135560344832464&h2=D%C3%A9boguer-par-journal) de toute les opérations exécutées.
-Les informations dans le journal persistent entre les utilisations de l'application. C'est-à-dire que le fichier servant de journal n'est pas remis à zéro quand vous lancez l'application.
+Le programme devra produire un [journal](https://thierryseegers.github.io/DevCommeLesPros-CoursMagistral/#d%C3%A9boguer-par-journal) de toute les opérations exécutées.
+Les informations dans le journal persistent entre les utilisations de l'application.
+C'est-à-dire que le fichier servant de journal n'est pas remis à zéro quand vous lancez l'application.
 
 # Instructions de travail
 
 Suivez les instructions de départ et les instructions de travail de l'exercice 4 avec deux exceptions :
-1. Vous pouvez travailler en groupe de deux ou trois.
+1. Vous pouvez travailler en groupe de deux ou trois personnes.
 1. La personne qui approuve et fusionne un «Pull Request» ne doit pas être la personne qui a ouvert le «Pull Request».
 C'est-à-dire que si Alice pousse sa branche vers GitHub et ouvre un «Pull Request» pour demander de la fusionner à la branche `master`, ce doit être Bob ou Charlie qui approuvera et fusionnera.
 Il incombe à Bob ou Charlie de confirmer que les tests ont bien passés sur la machine virtuelle de GitHub.
@@ -292,7 +288,7 @@ Bien sûr, au début la fonction retourne une fausse valeur mais on peut continu
 Connaissant la signature d'une fonction et ses responsabilités, on peut écrire des tests qui en vérifient le bon fonctionnement.
 Écrire des tests à l'avance est d'ailleurs une très bonne aide pour comprendre à quoi l'implémentation d'une fonction doit répondre : cas généraux, cas spéciaux, cas d'erreurs, etc.
 
-Écrivez une première version de vos bibliothèques avec des fonctions bounchons et publiez-la sur votre dépôt.
+Écrivez une première version de vos bibliothèques avec des fonctions bouchons et publiez-la sur votre dépôt.
 Vos coéquipiers pourront dès lors écrirent leur code en appellant ces fonctions.
 Même si elle ne font rien, au moins le code compilera.
 Écrivez ensuite les tests de vos fonctions et publiez-les.
@@ -304,6 +300,7 @@ Sans tests, vous n'aurez pas confiance ni en votre code ni en votre programme.
 En plus du programme qui sera votre application, écrivez en parallèle un autre programme.
 Un programme de tests qui rassemblera tout les tests que vous écrirez pour confirmer que vos bibliothèques opèrent correctement.
 C'est ce programme de test qui sera lancé par la cible `check` du `makefile`.
+Référez-vous à [l'exercice 2](https://github.com/Amu-DevCommeLesPros-2021/DevCommeLesPros-2021-Exo2) comme d'un projet qui contient deux programmes, un programme de test (`test/main.c`) et une application (`bin/main.c`).
 
 > Vous avez mis `false` pour la cible `check` dans le makefile. Du coup, ça nous a fait un échec sur GitHub dès le premier «Pull Request».
 
@@ -311,6 +308,8 @@ Je sais.
 C'est pour vous aider à bien faire les choses.
 `false` est littéralement un programme qui ne fait que retourner un code d'erreur.
 Remplacez `false` par autre chose tout de suite.
+(Vous êtes tenté de le changer pour `true` ?
+Crééz plutôt votre programme même s'il consiste en un simple `return 0;`.)
 
 > Mais si mon module dépend d'une fonction d'une autre module qui n'est pas encore implémentée ?
 
@@ -331,22 +330,14 @@ Tout comme pour les exercices 3 et 4, ce projet est configuré [1] de telle sort
 De ce fait, assurez-vous que la cible `check` de votre `makefile` dépende de votre programme de test et le lance.
 
 Si la vérification du service d'intégration continu venait à échouer, il vous incombe d'apporter les modifications nécéssaires à votre branch (toujours en faisant `add`, `commit` et `push`) pour rectifier la situation.
-Essentiellement, je vous demande de travailler comme pour les exercices 3 et 4 en suivant leurs [instructions de travail](https://github.com/thierryseegers/DevCommeLesPros-2020-Ex4#instructions-de-travail). 
+Essentiellement, je vous demande de travailler comme pour les exercices 3 et 4 en suivant leurs [instructions de travail](https://github.com/thierryseegers/DevCommeLesPros-2021-Exo4#instructions-de-travail). 
 Seulement, cette fois-ci, c'est vous qui écrirez les tests.
 
 [1] Curieux de savoir comment ?
-Ouvrez le fichier `.github/workflows/test-pull-request.yml`.
+Ouvrez le fichier `.github/workflows/test-master.yml`.
 Pour en savoir plus, cliquez [ici](https://help.github.com/en/actions/configuring-and-managing-workflows/configuring-a-workflow).
 
 ## Documentation
-
-### Documentation pour les ingénieurs
-
-Votre code doit être bien documenté pour vous-même et vos coéquipiers.
-La documentation des fonctions dans les fichiers d'en-tête sert de moyen de communication entre l'auteur de la fonction et ceux qui auront à l'appeller.
-La documentation du code à l'intérieur des fonctions sert à qui que ce soit qui aura à entretenir la fonction et à la déboguer.
-
-Un diagramme UML représentant graphiquement les dépendances entre les divers modules est aussi un excellent outil de communication entre les programmeurs.
 
 ### Documentation pour les utilisateurs
 
@@ -356,25 +347,33 @@ Ce sera le «[tuto](https://fr.wikipedia.org/wiki/Tutoriel)» de votre programme
 
 Ici, vous pouvez laisser parler votre créativité.
 Comment aimeriez-_vous_ qu'on vous apprenne à utiliser ce programme ?
-Par exemple, si vous vous sentez des âmes de comédiens, faites un tuto vidéo.
+Si vous vous sentez des âmes de comédiens, faites un tuto vidéo !
+
+### Documentation pour les ingénieurs
+
+Votre code doit être bien documenté pour vous-même et vos coéquipier·ère·s.
+La documentation des fonctions dans les fichiers d'en-tête sert de moyen de communication entre l'auteur de la fonction et ceux qui auront à l'appeller.
+La documentation du code à l'intérieur des fonctions sert à qui que ce soit qui aura à entretenir la fonction et à la déboguer.
+
+Un diagramme UML représentant graphiquement les dépendances entre les divers modules est aussi un excellent outil de communication entre les programmeurs.
 
 ## Phases de développement
 
-L'évolution de votre travail suivra les [stades de développement d'un projet](https://www.dropbox.com/scl/fi/12l29vxc1v4z74wum6ay3/D-velopper-comme-les-pros.paper?dl=0&rlkey=gbd3b2ajnlo93wz6xvsph5bcu#:uid=315118321024319072106121&h2=Stades-de-d%C3%A9veloppement).
+L'évolution de votre travail suivra les [stades de développement d'un projet](https://thierryseegers.github.io/DevCommeLesPros-CoursMagistral/#stades-de-d%C3%A9veloppement).
 Vous devrez qualifier les transitions entre ces étapes dans votre dépôt en utilisant des [tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging)s sur votre branche `master`. 
 Un tag est un commit qui ne contient qu'une courte description.
 Cette description devra suivre les règles décrites [ici](https://semver.org/lang/fr/).
 
-Pour taguer votre dépôt, faites à l'invite de commandes : `> git tag -a [la-version] -m "Message pour ce tag."`. Par exemple : `> git tag -a 1.0.0-alpha -m "Tout les modules sont à peu près finis. L'application peut être utilisée et est prête à être testée."`
+Pour taguer votre dépôt, faites à l'invite de commandes : `$ git tag -a [la-version] -m "Message pour ce tag."`. Par exemple : `$ git tag -a 1.0.0-alpha -m "Tout les modules sont à peu près finis. L'application peut être utilisée et est prête à être testée sérieusement."`
 
 Les tags doivent être «poussés» comme des commits.
-Après avoir créé un nouveau tag, faites à l'invite de commandes: `git push origin --tags`.
+Après avoir créé un nouveau tag, faites à l'invite de commandes: `$ git push origin --tags`.
 
 ### Pré-alpha
 
 C'est la première phase de développement.
 Dès le départ votre projet est en phase pré-alpha.
-Vous pouvez, immédiatement après avoir créé votre nouveau dépôt, le taguer avec `1.0.0-alpha+pre`.
+Vous pouvez, d'emblée après avoir créé votre nouveau dépôt, le taguer avec `1.0.0-alpha+pre`.
 
 Temps estimé de la phase pré-alpha : quatre à cinq semaines.
 
@@ -422,7 +421,7 @@ Allez chercher des points supplémentaires avec les [extras](#les-extras).
 
 # Évaluation
 
-La date d'évaluation est le *vendredi 29 mai à 23:59*. Le code écrit passé cette date ne sera pas considéré.
+La date d'évaluation est le *vendredi 31 mai à midi*. Le code écrit passé cette date ne sera pas considéré.
 
 Votre travail sera évalué sur les points suivants.
 
@@ -457,22 +456,26 @@ Chacun de ces extras vaut 1 point sur 20.
 Il vous permettront donc d'atteindre 19 ou 20 sur 20.
 
 *Ne tentez ces extras que si vous avez atteint l'objectif principal !
-Ils ne valent aucuns points si votre programme ne répond pas aux exigences de base décritent dans les [spécifications fonctionnelles](#sp%C3%A9cifications-fonctionelles).*
+Ils ne valent aucuns points si votre programme ne répond pas aux exigences de base décrites dans les [spécifications fonctionnelles](#sp%C3%A9cifications-fonctionelles).*
 
 À chaque extra correctement implémenté, incrémentez la version mineure de votre programme (par ex. «1.1.0» pour le premier extra, «1.2.0» pour le deuxième extra) comme décrit dans la section [Phases de développement](#Phases-de-d%C3%A9veloppement).
 
 Voici une liste d'extras à envisager.
 Je les ai mis dans un ordre qui, selon moi, est du plus facile au plus difficile.
 
-1. Un utilisateur, que ce soit une entreprise ou une personne, s'authentifie avec un mot de passe (ne conservez pas le mot de passe en clair dans la table, utilisez une [fonction de hachage](https://fr.wikipedia.org/wiki/Fonction_de_hachage_cryptographique)).
-1. Gardez une historique d'emploi pour chaque personne et utilisez cette historique lors des recherche parmi les anciens collègues.
-C'est-à-dire «qui travaille *ou a déjà travaillé* à telle ou telle entreprise.
+1. Un utilisateur, que ce soit un restaurant ou une personne, s'authentifie avec un mot de passe (ne conservez pas le mot de passe en clair dans la table, utilisez une [fonction de hachage](https://fr.wikipedia.org/wiki/Fonction_de_hachage_cryptographique)).
+1. Plusieurs restaurants peuvent vouloir offrir un même item mais à des prix différents.
+Dans ce cas, le prix n'est pas fixe par item mais varie de restaurant en restaurant.
+1. Un restaurant peut offrir à un·e client·e fidèle une réduction de prix.
+Par exemple, après trois achats, un rabais de 5% pour les prochains achats.
+Cette réduction ne s'applique que pour ce client et ce restaurant en particulier.
+Un client peux bénéficier de plusieurs réductions dans divers restaurants.
 1. Compressez toute la base de données par un codage de Huffman.
-Les fichiers sur le disque sont compressés.
-Ils sont décompressés en mémoire, modifiés au fil des opérations et au moment de quitter le programme ils sont recompressés et écrit sur le disque.
-Les fichiers décompressés n'apparaîssent jamais sur le disque, ni pendant, ni après l'utilisation du programme. 
+Les fichiers `.csv` sur le disque sont compressés.
+Ils sont décompressés en mémoire, modifiés au fil des opérations et au moment de quitter le programme ils sont recompressés et écrits sur le disque.
+Les fichiers décompressés n'apparaîssent *jamais* sur le disque, ni pendant, ni après l'utilisation du programme. 
 1. Écrivez un programme de test qui lance votre programme d'application, exécute certaines commandes comme le ferait un utlisateur humain et vérifie que tout s'est bien déroulé et que la base de données contient les bonnes informations.
 1. Utilisez une [véritable base de données SQL](https://sqlite.org/cintro.html) plutôt que des fichers `.csv` (cet extra n'est pas compatible avec l'extra 3).
 
 Vous avez une autre idée d'extra ?
-Faites-la approuver par votre «[client](thierry.seegers@yahoo.com)» au préalable.
+Faites-la approuver par votre «[client](thierry.seegers@univ-amu.fr)» au préalable.
