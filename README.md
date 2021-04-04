@@ -23,8 +23,8 @@ Vous n'êtes pas dans l'obligation de garder exactment les mêmes équipes que p
         - [Table d'items de menus](#table-ditems-de-menus)
         - [Table des livreurs](#table-des-livreurs)
         - [Table des clients](#table-des-clients)
-    - [Langage de programmation et paramètres de compilateur](#langage-de-programmation-et-param%C3%A8tres-de-compilateur)
     - [Journal](#journal)
+    - [Langage de programmation, paramètres de compilateur et proscriptions](#langage-de-programmation-param%C3%A8tres-de-compilateur-et-proscriptions)
 - [Instructions de travail](#instructions-de-travail)
     - [Modules/Bibliothèques](#modulesbiblioth%C3%A8ques)
     - [Tests](#tests)
@@ -66,6 +66,8 @@ Sur cette platforme, on distingue trois profils d'utilisateur avec des besoins e
 Chaque restaurant a son menu composé de plusieurs items.
 Certains items peuvent se retrouver sur des menus de différents restaurants.
 
+Au fils des commandes des clients, un montant est crédité dans le compte.
+
 - [ ] Créer un compte
     - [ ] Nom (du restaurant)
     - [ ] Code postal
@@ -80,6 +82,8 @@ Certains items peuvent se retrouver sur des menus de différents restaurants.
         - [ ] Prix
     - [ ] Ajouter un item au menu parmi la liste des items existants
     - [ ] Supprimer un item
+- [ ] Solde
+    - [ ] Voir le solde courant
 
 ## Fonctionalités pour un livreur
 
@@ -87,6 +91,8 @@ Un livreur n'a pas un rayon d'action infini.
 Chaque livreur a une liste de code postaux dans lesquels il peut se déplacer.
 Un livreur peut travailler à son propre compte ou travailler exclusivement pour un restaurant en particulier.
 Si un livreur travaille pour un restaurateur exclusivement, il est attendu qu'il peut se déplacer dans le code postal du restaurant en question.
+
+Au fils des commandes des clients, un montant est crédité dans le compte.
 
 - [ ] Créer un compte
     - [ ] Nom
@@ -98,6 +104,8 @@ Si un livreur travaille pour un restaurateur exclusivement, il est attendu qu'il
     - [ ] Code postaux de déplacement
     - [ ] Téléphone
     - [ ] Exclusivité restaurateur
+- [ ] Solde
+    - [ ] Voir le solde courant
 
 ## Fonctionalités pour un client
 
@@ -131,13 +139,13 @@ Par exemple, si j'habite dans le 13009, je peux me faire livrer d'un restaurant 
             - [ ] À qui peut me livrer
             - [ ] À un type de cuisine
             - [ ] À un seul restaurant
-            - [ ] Aux items moins cher que mon solde disponible
+            - [ ] Aux items moins chers que mon solde disponible
             - [ ] À une combinaison de ces paramètres
     - [ ] Ajouter un item
     - [ ] Enlever un item
     - [ ] Passer la commande
-        - [ ] Débite le solde
-
+        - [ ] Débite le solde du client
+        - [ ] Crédite les soldes du restaurant et du livreur
 
 # Spécifications de conception
 
@@ -156,18 +164,26 @@ Vous êtes :
 2. Un·e livreur·se
 3. Un·e client·e
 
-Votre choix ('q' pour quitter) : 1
+Votre choix ('q' pour quitter) :
 ```
 
 ```
-*** Bienvenu sur LuminEats, la livraison à vitesse luminique ***
-
 * Menu Restaurateur *
 
 Vous voulez :
-1. Créer un compte pour votre restaurant
-2. Supprimer votre compte
-3. Modifier votre menu (ajouter/modifier/supprimer)
+1. Vous connecter à votre compte
+2. Créer un nouveau compte
+
+Votre choix ('q' pour quitter, 'p' pour menu précédent) : 
+```
+
+```
+* Menu Restaurateur *
+
+Vous voulez :
+1. Supprimer votre compte
+2. Modifier votre menu (ajouter/modifier/supprimer)
+3. Confirmer votre solde
 
 Votre choix ('q' pour quitter, 'p' pour menu précédent) : 
 ```
@@ -176,19 +192,19 @@ Votre choix ('q' pour quitter, 'p' pour menu précédent) :
 
 La base de données sera constituée de plusieurs fichiers `.csv`.
 Un fichier par table.
-Les tables de la base de données suivent le même format que la table utilisée dans l'exercice 4 (`docteurs.txt`) où les champs sont séparés par des virgules.
+Les tables de la base de données suivent le même format que la table utilisée dans l'exercice 4 ([docteurs.txt](https://github.com/Amu-DevCommeLesPros-2021/DevCommeLesPros-2021-Exo4/blob/master/test/docteurs.txt)) où les champs sont séparés par des virgules.
 Si un champ contient plusieurs valeurs, celles-ci sont séparées par des points-virgules.
-Ce format standard s'appelle d'ailleurs [«Comma-separated values»](https://fr.wikipedia.org/wiki/Comma-separated_values) (valeurs séparées par des virgules).
-En général, l'extension de ces fichiers sont `.csv` plutôt que `.txt`.
+Ce format standard s'appelle [«Comma-separated values»](https://fr.wikipedia.org/wiki/Comma-separated_values) (valeurs séparées par des virgules).
+En général, l'extension de ces fichiers est `.csv` plutôt que `.txt`.
+Les applications de tableurs, Excel par exemple, peuvent utiliser ce format de fichier.
 
 L'application doit pouvoir utiliser une base de données existante.
-Les informations dans la base de données persiste entre les utilisations de l'application.
+Les informations dans la base de données persistent entre les utilisations de l'application.
 C'est-à-dire qu'elle n'est pas remise à zéro à chaque fois que lancez l'application.
 Si je crée un ouveau compte client et que je quitte l'application, je doit pouvoir relancer l'application et y retrouver mon compte client déjà créé.
 
 Chaque tuple dans une table est assigné une clé primaire avec un numéro unique dans cette table.
 Certains attributs peuvent être des clés étrangères.
-
 Quelques exemples :
 
 ### Table des restaurants
@@ -196,10 +212,10 @@ Quelques exemples :
 L'attribut `menu` est une liste de clés primaires `id` de la table des items.
 
 ```
-id,nom,code postal,telephone,type,menu
-1,Chez Michel,13001,04 13 13 13 13,Provencal,1;4;5
-2,Le Veg,13005,04 10 11 12 13,Vegetarien,2;3;4
-3,Joe's International House of Pancakes,13010,04 22 33 44 55,6;7
+id,nom,code postal,telephone,type,menu,solde
+1,Chez Michel,13001,04 13 13 13 13,Provencal,1;4;5,50
+2,Le Veg,13005,04 10 11 12 13,Vegetarien,2;3;4,24
+3,Joe's International House of Pancakes,13010,04 22 33 44 55,Americain,6;7,44
 ```
 
 ### Table d'items de menus
@@ -221,42 +237,44 @@ Si le livreur travaille exclusivement pour un restaurant en particuler, l'attrib
 Si le livreur travaille à son propre compte, l'attribut `restaurant` sera `0`.
 
 ```
-id,nom,deplacement,telephone,restaurant
-1,Francois Pignon,13001;13002;13003,1
-2,Donald Duck,13001;13004;13005;13006;13009;13010,0
-3,Mickey Mouse,13008,13009;13010;13011,0
+id,nom,deplacement,telephone,restaurant,solde
+1,Francois Pignon,13001;13002;13003,1,20
+2,Donald Duck,13001;13004;13005;13006;13009;13010,0,25
+3,Mickey Mouse,13008,13009;13010;13011,0,0
 ```
 
 ### Table des clients
 
 ```
-id,nom,code postal,telephone
-1,Francoise Perrin,13005,04 10 20 30 40
-2,Daffy Duck,13010,04 90 91 92 93
-3,Quentin Tarantino,13008,04 99 88 77 66
+id,nom,code postal,telephone,solde
+1,Francoise Perrin,13005,04 10 20 30 40,0
+2,Daffy Duck,13010,04 90 91 92 93,50
+3,Quentin Tarantino,13008,04 99 88 77 66,15
 ```
 
 > Est-ce qu'on doit «commit»er les fichiers de la base de données ?
 
-Il vous sera probablement bénéfique, en effet, d'avoir une certaine base de données de départ partagée entre vous.
+Il vous sera probablement bénéfique, en effet, d'avoir une certaine base de données de départ.
 Ne perdez pas trop temps à la remplir.
 C'est amusant à faire mais les noms de restaurant rigolos ne valent pas plus de points.
 
 Par la suite, quand vous testez votre application, si la base de données est modifiée par les tests, elle ne devrait pas être «commit»ée.
 Il est préférable de toujours tester à partir du même point.
 
-## Langage de programmation et paramètres de compilateur
+## Journal
+
+Le programme devra produire un [journal](https://thierryseegers.github.io/DevCommeLesPros-CoursMagistral/#d%C3%A9boguer-par-journal) de toute les opérations exécutées.
+Les informations dans le journal persistent entre les utilisations de l'application.
+C'est-à-dire que le fichier servant de journal n'est pas remis à zéro quand vous lancez l'application.
+
+## Langage de programmation, paramètres de compilateur et proscriptions
 
 Le projet peut être écrit en C ou en C++.
 
 Utilisez les options `-Wall -Wextra -Werror` du compilateur.
 Ces options nous évitent bien des maux de tête car elles soulignent des erreurs qui peuvent facilement devenir fatales.
 
-## Journal
-
-Le programme devra produire un [journal](https://thierryseegers.github.io/DevCommeLesPros-CoursMagistral/#d%C3%A9boguer-par-journal) de toute les opérations exécutées.
-Les informations dans le journal persistent entre les utilisations de l'application.
-C'est-à-dire que le fichier servant de journal n'est pas remis à zéro quand vous lancez l'application.
+Comme pour les [exercices précédents](https://github.com/Amu-DevCommeLesPros-2021/DevCommeLesPros-2021-Exo1#pourquoi-pas-de-goto-ou-de-boucles-infinies-), gardez vous d'utiliser `goto` et d'avoir des boucles «infinies». La fonction [exit()](https://en.cppreference.com/w/c/program/exit) est également proscrite pour vous forcer à éviter de programmer des «culs-de-sac».
 
 # Instructions de travail
 
@@ -279,17 +297,17 @@ Ensuite vous pourez travaillez plus individuellement aux tâches que vous vous s
 > Mais si mon module doit appeller une fonction d'une autre module qui n'existe pas encore ?
 
 Rappellez-vous des exercices précédents où vous aviez à implémenter des fonctions «vides».
-Ces fonctions ou méthodes s'appellent des [bouchons](https://fr.wikipedia.org/wiki/Bouchon_(informatique)) (ou [stub](https://en.wikipedia.org/wiki/Method_stub) en anglais).
+Ces fonctions ou méthodes s'appellent des [bouchons](https://fr.wikipedia.org/wiki/Bouchon_(informatique)) (ou «[stub](https://en.wikipedia.org/wiki/Method_stub)» en anglais).
 Ces bouchons servent justement à deux choses :
 
-1. Faire en sorte qu'un module A qui dépend de la fonction d'un module B puisse être développé et compilé _comme si_ la fonction était implémentée. 
-Bien sûr, au début la fonction retourne une fausse valeur mais on peut continuer le développement du module A quand même en faisant semblant.
+1. Faire en sorte qu'un module `A` qui dépend de la fonction d'un module `B` puisse être développé et compilé _comme si_ la fonction était implémentée. 
+Bien sûr, au début la fonction retourne une fausse valeur mais on peut continuer le développement du module `A` quand même en faisant semblant.
 2. On peut écrire des tests avant même que la fonction soit implémentée. 
-Connaissant la signature d'une fonction et ses responsabilités, on peut écrire des tests qui en vérifient le bon fonctionnement.
+Connaissant la prototype d'une fonction et ses responsabilités, on peut écrire des tests qui en vérifient le bon fonctionnement.
 Écrire des tests à l'avance est d'ailleurs une très bonne aide pour comprendre à quoi l'implémentation d'une fonction doit répondre : cas généraux, cas spéciaux, cas d'erreurs, etc.
 
 Écrivez une première version de vos bibliothèques avec des fonctions bouchons et publiez-la sur votre dépôt.
-Vos coéquipiers pourront dès lors écrirent leur code en appellant ces fonctions.
+Vos coéquipiers pourront dès lors écrire leur code en appellant ces fonctions.
 Même si elle ne font rien, au moins le code compilera.
 Écrivez ensuite les tests de vos fonctions et publiez-les.
 Finalement, implémentez vos fonctions et publiez-les.
@@ -300,7 +318,7 @@ Sans tests, vous n'aurez pas confiance ni en votre code ni en votre programme.
 En plus du programme qui sera votre application, écrivez en parallèle un autre programme.
 Un programme de tests qui rassemblera tout les tests que vous écrirez pour confirmer que vos bibliothèques opèrent correctement.
 C'est ce programme de test qui sera lancé par la cible `check` du `makefile`.
-Référez-vous à [l'exercice 2](https://github.com/Amu-DevCommeLesPros-2021/DevCommeLesPros-2021-Exo2) comme d'un projet qui contient deux programmes, un programme de test (`test/main.c`) et une application (`bin/main.c`).
+Référez-vous à [l'exercice 2](https://github.com/Amu-DevCommeLesPros-2021/DevCommeLesPros-2021-Exo2) pour un projet qui contient deux programmes, un programme de test (`test/main.c`) et une application (`bin/main.c`).
 
 > Vous avez mis `false` pour la cible `check` dans le makefile. Du coup, ça nous a fait un échec sur GitHub dès le premier «Pull Request».
 
@@ -309,7 +327,7 @@ C'est pour vous aider à bien faire les choses.
 `false` est littéralement un programme qui ne fait que retourner un code d'erreur.
 Remplacez `false` par autre chose tout de suite.
 (Vous êtes tenté de le changer pour `true` ?
-Crééz plutôt votre programme même s'il consiste en un simple `return 0;`.)
+Créez plutôt votre programme même s'il est vide ne consiste qu'en un simple `return 0;`.)
 
 > Mais si mon module dépend d'une fonction d'une autre module qui n'est pas encore implémentée ?
 
@@ -320,7 +338,7 @@ Vous perdriez un temps précieux.
 ### Tests unitaires et tests d'intégration
 
 Durant la première phase de développement, les tests que vous écrirez seront plutôt des test unitaires.
-C'est-à-dire des tests qui testent les divers modules en isolation.
+C'est-à-dire des tests qui testent les fonctionalités des divers modules en isolation.
 
 Une fois que votre application commence à se tenir debout vous pourrez commencer à le tester dans son ensemble, à le lancer à l'invite de commandes et l'utiliser comme un utilisateur lambda le ferait.
 
@@ -329,7 +347,7 @@ Une fois que votre application commence à se tenir debout vous pourrez commence
 Tout comme pour les exercices 3 et 4, ce projet est configuré [1] de telle sorte qu'en ouvrant un «Pull Request», GitHub lance une machine virtuelle Ubuntu qui clone votre dépôt et exécute la commande `make check` à l'invite de commande.
 De ce fait, assurez-vous que la cible `check` de votre `makefile` dépende de votre programme de test et le lance.
 
-Si la vérification du service d'intégration continu venait à échouer, il vous incombe d'apporter les modifications nécéssaires à votre branch (toujours en faisant `add`, `commit` et `push`) pour rectifier la situation.
+Si la vérification du service d'intégration continu venait à échouer, il vous incombe d'apporter les modifications nécéssaires à votre branche (toujours en faisant `add`, `commit` et `push`) pour rectifier la situation.
 Essentiellement, je vous demande de travailler comme pour les exercices 3 et 4 en suivant leurs [instructions de travail](https://github.com/thierryseegers/DevCommeLesPros-2021-Exo4#instructions-de-travail). 
 Seulement, cette fois-ci, c'est vous qui écrirez les tests.
 
@@ -352,10 +370,10 @@ Si vous vous sentez des âmes de comédiens, faites un tuto vidéo !
 ### Documentation pour les ingénieurs
 
 Votre code doit être bien documenté pour vous-même et vos coéquipier·ère·s.
-La documentation des fonctions dans les fichiers d'en-tête sert de moyen de communication entre l'auteur de la fonction et ceux qui auront à l'appeller.
+La documentation des fonctions dans les fichiers d'en-tête sert de moyen de communication entre l'auteur·trice de la fonction et ceux qui auront à l'appeller.
 La documentation du code à l'intérieur des fonctions sert à qui que ce soit qui aura à entretenir la fonction et à la déboguer.
 
-Un diagramme UML représentant graphiquement les dépendances entre les divers modules est aussi un excellent outil de communication entre les programmeurs.
+Un diagramme UML représentant graphiquement les dépendances entre les divers modules est aussi un excellent outil de communication entre les programmeurs. (Un outil gratuit pour créer des diagrammes UML se trouve [ici](https://app.diagrams.net/)).
 
 ## Phases de développement
 
@@ -436,7 +454,7 @@ Votre travail sera évalué sur les points suivants.
 
 - Convivialité de l'interface.
 - Fonctionalités implémentées.
-- Bogue(s) présent(s).
+- Bogues présents.
 - Documentation de l'application.
 
 ## La méthode de développement
@@ -458,24 +476,28 @@ Il vous permettront donc d'atteindre 19 ou 20 sur 20.
 *Ne tentez ces extras que si vous avez atteint l'objectif principal !
 Ils ne valent aucuns points si votre programme ne répond pas aux exigences de base décrites dans les [spécifications fonctionnelles](#sp%C3%A9cifications-fonctionelles).*
 
-À chaque extra correctement implémenté, incrémentez la version mineure de votre programme (par ex. «1.1.0» pour le premier extra, «1.2.0» pour le deuxième extra) comme décrit dans la section [Phases de développement](#Phases-de-d%C3%A9veloppement).
+À chaque extra correctement implémenté, incrémentez la version mineure de votre programme («1.1.0» pour le premier extra, «1.2.0» pour le deuxième extra) comme décrit dans la section [Phases de développement](#Phases-de-d%C3%A9veloppement).
 
 Voici une liste d'extras à envisager.
 Je les ai mis dans un ordre qui, selon moi, est du plus facile au plus difficile.
 
-1. Un utilisateur, que ce soit un restaurant ou une personne, s'authentifie avec un mot de passe (ne conservez pas le mot de passe en clair dans la table, utilisez une [fonction de hachage](https://fr.wikipedia.org/wiki/Fonction_de_hachage_cryptographique)).
+1. Un utilisateur, que ce soit un restaurant ou une personne, s'authentifie avec un mot de passe.
+Ne conservez pas le mot de passe en clair dans la table, utilisez une [fonction de hachage](https://fr.wikipedia.org/wiki/Fonction_de_hachage_cryptographique).
 1. Plusieurs restaurants peuvent vouloir offrir un même item mais à des prix différents.
 Dans ce cas, le prix n'est pas fixe par item mais varie de restaurant en restaurant.
 1. Un restaurant peut offrir à un·e client·e fidèle une réduction de prix.
 Par exemple, après trois achats, un rabais de 5% pour les prochains achats.
 Cette réduction ne s'applique que pour ce client et ce restaurant en particulier.
 Un client peux bénéficier de plusieurs réductions dans divers restaurants.
+1. Donnez le choix de la langue d'affichage du programme.
+Par exemple, l'utilisateur du programme peut choisir un affichage en anglais.
+Le programme mémorise la préférence de langage pour chaque utilisateur.
 1. Compressez toute la base de données par un codage de Huffman.
 Les fichiers `.csv` sur le disque sont compressés.
 Ils sont décompressés en mémoire, modifiés au fil des opérations et au moment de quitter le programme ils sont recompressés et écrits sur le disque.
 Les fichiers décompressés n'apparaîssent *jamais* sur le disque, ni pendant, ni après l'utilisation du programme. 
+1. Utilisez une [véritable base de données SQL](https://sqlite.org/cintro.html) plutôt que des fichers `.csv` (cet extra n'est pas compatible avec l'extra précédent).
 1. Écrivez un programme de test qui lance votre programme d'application, exécute certaines commandes comme le ferait un utlisateur humain et vérifie que tout s'est bien déroulé et que la base de données contient les bonnes informations.
-1. Utilisez une [véritable base de données SQL](https://sqlite.org/cintro.html) plutôt que des fichers `.csv` (cet extra n'est pas compatible avec l'extra 3).
 
 Vous avez une autre idée d'extra ?
 Faites-la approuver par votre «[client](thierry.seegers@univ-amu.fr)» au préalable.
