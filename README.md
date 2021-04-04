@@ -327,12 +327,12 @@ C'est pour vous aider à bien faire les choses.
 `false` est littéralement un programme qui ne fait que retourner un code d'erreur.
 Remplacez `false` par autre chose tout de suite.
 (Vous êtes tenté de le changer pour `true` ?
-Créez plutôt votre programme même s'il est vide ne consiste qu'en un simple `return 0;`.)
+Créez plutôt immédiatement votre programme de test même s'il est vide ne consiste qu'en un simple `return 0;`.)
 
 > Mais si mon module dépend d'une fonction d'une autre module qui n'est pas encore implémentée ?
 
 Écrivez quand même vos tests quitte à les laisser commentés temporairement !
-N'attendez pas que vos coéquipiers aient tout terminé pour commencer à travailler sur votre module.
+N'attendez pas que vos coéquipier·ère·s aient tout terminé pour commencer à travailler sur votre module.
 Vous perdriez un temps précieux.
 
 ### Tests unitaires et tests d'intégration
@@ -347,7 +347,7 @@ Une fois que votre application commence à se tenir debout vous pourrez commence
 Tout comme pour les exercices 3 et 4, ce projet est configuré [1] de telle sorte qu'en ouvrant un «Pull Request», GitHub lance une machine virtuelle Ubuntu qui clone votre dépôt et exécute la commande `make check` à l'invite de commande.
 De ce fait, assurez-vous que la cible `check` de votre `makefile` dépende de votre programme de test et le lance.
 
-Si la vérification du service d'intégration continu venait à échouer, il vous incombe d'apporter les modifications nécéssaires à votre branche (toujours en faisant `add`, `commit` et `push`) pour rectifier la situation.
+Si la vérification du service d'intégration continu venait à échouer, il vous incombe d'apporter les modifications nécessaires à votre branche (toujours en faisant `add`, `commit` et `push`) pour rectifier la situation.
 Essentiellement, je vous demande de travailler comme pour les exercices 3 et 4 en suivant leurs [instructions de travail](https://github.com/thierryseegers/DevCommeLesPros-2021-Exo4#instructions-de-travail). 
 Seulement, cette fois-ci, c'est vous qui écrirez les tests.
 
@@ -434,8 +434,6 @@ Vous avez déjà officiellement tagué votre dépôt `1.0.0` mais vous venez de 
 Qu'à cela ne tienne, continuez avec `1.0.n` si vous les réparez.
 
 La version `1.0.0` parfaite vous vaudra 18/20.
-Allez chercher des points supplémentaires avec les [extras](#les-extras).
-À chaque nouvel extra implémenté, incrémentez le numéro de version mineur de votre dépôt. Par exemple `1.1.0`.
 
 # Évaluation
 
@@ -495,9 +493,8 @@ Le programme mémorise la préférence de langage pour chaque utilisateur.
 1. Compressez toute la base de données par un codage de Huffman.
 Les fichiers `.csv` sur le disque sont compressés.
 Ils sont décompressés en mémoire, modifiés au fil des opérations et au moment de quitter le programme ils sont recompressés et écrits sur le disque.
-Les fichiers décompressés n'apparaîssent *jamais* sur le disque, ni pendant, ni après l'utilisation du programme. 
+Les fichiers décompressés n'apparaissent *jamais* sur le disque, ni pendant, ni après l'utilisation du programme. 
 1. Utilisez une [véritable base de données SQL](https://sqlite.org/cintro.html) plutôt que des fichers `.csv` (cet extra n'est pas compatible avec l'extra précédent).
-1. Écrivez un programme de test qui lance votre programme d'application, exécute certaines commandes comme le ferait un utlisateur humain et vérifie que tout s'est bien déroulé et que la base de données contient les bonnes informations.
 
 Vous avez une autre idée d'extra ?
 Faites-la approuver par votre «[client](thierry.seegers@univ-amu.fr)» au préalable.
