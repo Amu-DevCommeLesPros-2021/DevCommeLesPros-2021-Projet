@@ -4,9 +4,9 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "make all",
+            "label": "make test",
             "type": "shell",
-            "command": "make all",
+            "command": "make build/test",
             "group": {
                 "kind": "build",
                 "isDefault": true
@@ -14,7 +14,18 @@
             "problemMatcher": "$gcc",
             "presentation": {
                 "reveal": "always",
-                "panel": "new"
+                "panel": "shared"
+            }
+        },
+        {
+            "label": "make all",
+            "type": "shell",
+            "command": "make all",
+            "group": "build",
+            "problemMatcher": "$gcc",
+            "presentation": {
+                "reveal": "always",
+                "panel": "shared"
             }
         },
         {
@@ -23,7 +34,7 @@
             "command": "make clean",
             "presentation": {
                 "reveal": "always",
-                "panel": "new"
+                "panel": "shared"
             },
             "problemMatcher": []
         }
