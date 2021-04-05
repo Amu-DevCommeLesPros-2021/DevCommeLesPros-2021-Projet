@@ -433,8 +433,6 @@ Pas tout à fait...
 Vous avez déjà officiellement tagué votre dépôt `1.0.0` mais vous venez de découvrir un ou deux nouveaux bogues ?
 Qu'à cela ne tienne, continuez avec `1.0.n` si vous les réparez.
 
-La version `1.0.0` parfaite vous vaudra 18/20.
-
 # Évaluation
 
 La date d'évaluation est le *vendredi 31 mai à midi*. Le code écrit passé cette date ne sera pas considéré.
