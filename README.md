@@ -237,10 +237,10 @@ Si le livreur travaille exclusivement pour un restaurant en particuler, l'attrib
 Si le livreur travaille à son propre compte, l'attribut `restaurant` sera `0`.
 
 ```
-id,nom,deplacement,telephone,restaurant,solde
-1,Francois Pignon,13001;13002;13003,1,20
-2,Donald Duck,13001;13004;13005;13006;13009;13010,0,25
-3,Mickey Mouse,13008,13009;13010;13011,0,0
+id,nom,telephone,deplacements,restaurant,solde
+1,Francois Pignon,06 00 00 00 00,13001;13002;13003,1,20
+2,Donald Duck,06 01 02 03 04,13001;13004;13005;13006;13009;13010,0,25
+3,Mickey Mouse,06 11 22 33 44,13008,13009;13010;13011,0,0
 ```
 
 ### Table des clients
@@ -248,8 +248,8 @@ id,nom,deplacement,telephone,restaurant,solde
 ```
 id,nom,code postal,telephone,solde
 1,Francoise Perrin,13005,04 10 20 30 40,0
-2,Daffy Duck,13010,04 90 91 92 93,50
-3,Quentin Tarantino,13008,04 99 88 77 66,15
+2,Daffy Duck,13010,06 90 91 92 93,50
+3,Quentin Tarantino,13008,06 99 88 77 66,15
 ```
 
 > Est-ce qu'on doit «commit»er les fichiers de la base de données ?
