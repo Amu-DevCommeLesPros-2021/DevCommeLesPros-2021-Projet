@@ -263,7 +263,7 @@ Il est préférable de toujours tester à partir du même point.
 
 ## Journal
 
-Le programme devra produire un [journal](https://thierryseegers.github.io/DevCommeLesPros-CoursMagistral/#d%C3%A9boguer-par-journal) de toute les opérations exécutées.
+Le programme devra produire un [journal](https://DevCommeLesPros.github.io/CoursMagistral/#d%C3%A9boguer-par-journal) de toute les opérations exécutées.
 Les informations dans le journal persistent entre les utilisations de l'application.
 C'est-à-dire que le fichier servant de journal n'est pas remis à zéro quand vous lancez l'application.
 
@@ -348,7 +348,7 @@ Tout comme pour les exercices 3 et 4, ce projet est configuré [1] de telle sort
 De ce fait, assurez-vous que la cible `check` de votre `makefile` dépende de votre programme de test et le lance.
 
 Si la vérification du service d'intégration continu venait à échouer, il vous incombe d'apporter les modifications nécessaires à votre branche (toujours en faisant `add`, `commit` et `push`) pour rectifier la situation.
-Essentiellement, je vous demande de travailler comme pour les exercices 3 et 4 en suivant leurs [instructions de travail](https://github.com/thierryseegers/DevCommeLesPros-2021-Exo4#instructions-de-travail). 
+Essentiellement, je vous demande de travailler comme pour les exercices 3 et 4 en suivant leurs [instructions de travail](https://github.com/Amu-DevCommeLesPros-2021/DevCommeLesPros-2021-Exo4#instructions-de-travail). 
 Seulement, cette fois-ci, c'est vous qui écrirez les tests.
 
 [1] Curieux de savoir comment ?
@@ -377,7 +377,7 @@ Un diagramme UML représentant graphiquement les dépendances entre les divers m
 
 ## Phases de développement
 
-L'évolution de votre travail suivra les [stades de développement d'un projet](https://thierryseegers.github.io/DevCommeLesPros-CoursMagistral/#stades-de-d%C3%A9veloppement).
+L'évolution de votre travail suivra les [stades de développement d'un projet](https://devcommelespros.github.io/CoursMagistral/#stades-de-d%C3%A9veloppement).
 Vous devrez qualifier les transitions entre ces étapes dans votre dépôt en utilisant des [tag](https://git-scm.com/book/en/v2/Git-Basics-Tagging)s sur votre branche `master`. 
 Un tag est un commit qui ne contient qu'une courte description.
 Cette description devra suivre les règles décrites [ici](https://semver.org/lang/fr/).
