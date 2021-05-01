@@ -92,7 +92,7 @@ Chaque livreur a une liste de code postaux dans lesquels il peut se déplacer.
 Un livreur peut travailler à son propre compte ou travailler exclusivement pour un restaurant en particulier.
 Si un livreur travaille pour un restaurateur exclusivement, il est attendu qu'il peut se déplacer dans le code postal du restaurant en question.
 
-Au fils des commandes des clients, un montant est crédité dans le compte.
+Au fil des commandes des clients, un montant est crédité dans le compte.
 
 - [ ] Créer un compte
     - [ ] Nom
@@ -222,7 +222,7 @@ id,nom,code postal,telephone,type,menu,solde
 
 ```
 id,nom,ingredients,prix
-1,bouillabaise,poissons de roche;pommes de terre,25
+1,bouillabaisse,poissons de roche;pommes de terre,25
 2,taco,haricots;salsa;lime;tortilla,4
 3,houmous,pois chiche;tahini;ail;citron,6
 4,ratatouille,aubergine;courgette;poivron;tomate,15
@@ -274,7 +274,8 @@ Le projet peut être écrit en C ou en C++.
 Utilisez les options `-Wall -Wextra -Werror` du compilateur.
 Ces options nous évitent bien des maux de tête car elles soulignent des erreurs qui peuvent facilement devenir fatales.
 
-Comme pour les [exercices précédents](https://github.com/Amu-DevCommeLesPros-2021/DevCommeLesPros-2021-Exo1#pourquoi-pas-de-goto-ou-de-boucles-infinies-), gardez vous d'utiliser `goto` et d'avoir des boucles «infinies». La fonction [exit()](https://en.cppreference.com/w/c/program/exit) est également proscrite pour vous forcer à éviter de programmer des «culs-de-sac».
+Comme pour les [exercices précédents](https://github.com/Amu-DevCommeLesPros-2021/DevCommeLesPros-2021-Exo1#pourquoi-pas-de-goto-ou-de-boucles-infinies-), gardez-vous d'utiliser `goto` et d'avoir des boucles «infinies».
+La fonction [exit()](https://en.cppreference.com/w/c/program/exit) est également proscrite pour vous forcer à éviter de programmer des «culs-de-sac».
 
 # Instructions de travail
 
@@ -331,7 +332,7 @@ Créez plutôt immédiatement votre programme de test même s'il est vide ne con
 
 > Mais si mon module dépend d'une fonction d'une autre module qui n'est pas encore implémentée ?
 
-Écrivez quand même vos tests quitte à les laisser commentés temporairement !
+Écrivez quand même vos tests, quitte à les laisser commentés temporairement !
 N'attendez pas que vos coéquipier·ère·s aient tout terminé pour commencer à travailler sur votre module.
 Vous perdriez un temps précieux.
 
@@ -373,7 +374,8 @@ Votre code doit être bien documenté pour vous-même et vos coéquipier·ère·
 La documentation des fonctions dans les fichiers d'en-tête sert de moyen de communication entre l'auteur·trice de la fonction et ceux qui auront à l'appeller.
 La documentation du code à l'intérieur des fonctions sert à qui que ce soit qui aura à entretenir la fonction et à la déboguer.
 
-Un diagramme UML représentant graphiquement les dépendances entre les divers modules est aussi un excellent outil de communication entre les programmeurs. (Un outil gratuit pour créer des diagrammes UML se trouve [ici](https://app.diagrams.net/)).
+Un diagramme UML représentant graphiquement les dépendances entre les divers modules est aussi un excellent outil de communication entre les programmeurs.
+(Un outil gratuit pour créer des diagrammes UML se trouve [ici](https://app.diagrams.net/)).
 
 ## Phases de développement
 
@@ -382,7 +384,8 @@ Vous devrez qualifier les transitions entre ces étapes dans votre dépôt en ut
 Un tag est un commit qui ne contient qu'une courte description.
 Cette description devra suivre les règles décrites [ici](https://semver.org/lang/fr/).
 
-Pour taguer votre dépôt, faites à l'invite de commandes : `$ git tag -a [la-version] -m "Message pour ce tag."`. Par exemple : `$ git tag -a 1.0.0-alpha -m "Tout les modules sont à peu près finis. L'application peut être utilisée et est prête à être testée sérieusement."`
+Pour taguer votre dépôt, faites à l'invite de commandes : `$ git tag -a [la-version] -m "Message pour ce tag."`.
+Par exemple : `$ git tag -a 1.0.0-alpha -m "Tout les modules sont à peu près finis. L'application peut être utilisée et est prête à être testée sérieusement."`
 
 Les tags doivent être «poussés» comme des commits.
 Après avoir créé un nouveau tag, faites à l'invite de commandes: `$ git push origin --tags`.
